@@ -1,0 +1,71 @@
+<div>
+    <h2 id="page-heading">
+        <span>Logic Accounts</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-logic-account" [routerLink]="['/logic-account/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Logic Account
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="logicAccounts">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="codiceFiscale"><span>Codice Fiscale</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span>Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefono"><span>Telefono</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cellulare"><span>Cellulare</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foto"><span>Foto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="userJh.login"><span>User Jh</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let logicAccount of logicAccounts ;trackBy: trackId">
+                <td><a [routerLink]="['/logic-account', logicAccount.id, 'view' ]">{{logicAccount.id}}</a></td>
+                <td>{{logicAccount.codiceFiscale}}</td>
+                <td>{{logicAccount.email}}</td>
+                <td>{{logicAccount.telefono}}</td>
+                <td>{{logicAccount.cellulare}}</td>
+                <td>
+                    <a *ngIf="logicAccount.foto" (click)="openFile(logicAccount.fotoContentType, logicAccount.foto)">
+                        <img [src]="'data:' + logicAccount.fotoContentType + ';base64,' + logicAccount.foto" style="max-height: 30px;" alt="logicAccount image"/>
+                    </a>
+                    <span *ngIf="logicAccount.foto">{{logicAccount.fotoContentType}}, {{byteSize(logicAccount.foto)}}</span>
+                </td>
+                <td>
+                    {{logicAccount.userJh?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/logic-account', logicAccount.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/logic-account', logicAccount.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'logic-account/'+ logicAccount.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+{
+    "name": "LogicAccount",
+    "fields": [
+        {
+            "fieldName": "codiceFiscale",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "telefono",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cellulare",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "foto",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "userJh",
+            "otherEntityName": "user",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "logicAccount"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "logicRelation",
+            "otherEntityName": "affiliazione",
+            "otherEntityRelationshipName": "logicAccount"
+        }
+    ],
+    "changelogDate": "20180723145919",
+    "entityTableName": "logic_account",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

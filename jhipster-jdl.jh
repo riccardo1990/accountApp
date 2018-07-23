@@ -1,0 +1,23 @@
+
+entity LogicAccount{
+	codiceFiscale String required,
+    email String required,
+    telefono String,
+    cellulare String,
+    foto ImageBlob
+}
+
+entity Affiliazione{
+	codPuntoVenditaExt String,
+    dataAffiliazione LocalDate
+}
+
+relationship OneToOne {
+	LogicAccount{userJh(login)} to User
+}
+
+relationship OneToMany {
+	LogicAccount{logicRelation(codiceFiscale)} to Affiliazione
+}
+
+paginate LogicAccount, Affiliazione with infinite-scroll

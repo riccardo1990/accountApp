@@ -1,0 +1,30 @@
+{
+    "name": "Affiliazione",
+    "fields": [
+        {
+            "fieldName": "codPuntoVenditaExt",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dataAffiliazione",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "logicAccount",
+            "otherEntityName": "logicAccount",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180723145920",
+    "entityTableName": "affiliazione",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

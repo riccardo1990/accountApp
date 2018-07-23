@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="affiliazione">
+            <h2><span>Affiliazione</span> {{affiliazione.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Cod Punto Vendita Ext</span></dt>
+                <dd>
+                    <span>{{affiliazione.codPuntoVenditaExt}}</span>
+                </dd>
+                <dt><span>Data Affiliazione</span></dt>
+                <dd>
+                    <span>{{affiliazione.dataAffiliazione}}</span>
+                </dd>
+                <dt><span>Logic Account</span></dt>
+                <dd>
+                    <div *ngIf="affiliazione.logicAccount">
+                        <a [routerLink]="['/logic-account', affiliazione.logicAccount?.id, 'view']">{{affiliazione.logicAccount?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/affiliazione', affiliazione.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
